@@ -302,5 +302,163 @@
         <div class="wave-bottom wave-ivory"></div>
       </section>
       <!--  END OF SECTION 4: COLLECTION   |   Samaneh -->
+        <!--  SECTION 5: THE CRAFT Code by: Susan                 >>> START <<< -->
+      <!-- QUOTE -->
+      <section class="quote-section section-pad fx">
+        <div class="fxbg photo slot" data-img="bgQuote" data-pal="1"></div>
+        <div class="fxbg light"></div>
+        <div class="container text-center reveal">
+          <div class="quote-mark">“</div>
+          <blockquote>
+            Some things are not made to follow time.<br />They are made to
+            <em>outlive it.</em>
+          </blockquote>
+          <span class="quote-credit">The Aqcha philosophy</span>
+        </div>
+      </section>
+
+      <!-- CONTACT -->
+      <section class="contact-section section-pad fx" id="contact">
+        <div class="fxbg dark"></div>
+        <div class="container">
+          <div class="contact-inner reveal">
+            <p class="eyebrow eyebrow-light">Let's begin a story</p>
+            <h2 class="section-title light-title">
+              Find the piece<br />that feels like <em>yours.</em>
+            </h2>
+            <p>
+              For collection enquiries, collaborations, or simply to learn more
+              about the women and the craft behind Aqcha.
+            </p>
+
+            <form id="contactForm" class="zaar-form" novalidate>
+              <div class="row g-4">
+                <div class="col-md-6 field">
+                  <label for="fName">Full name</label
+                  ><input
+                    id="fName"
+                    name="name"
+                    type="text"
+                    autocomplete="name"
+                  /><small class="err"></small>
+                </div>
+                <div class="col-md-6 field">
+                  <label for="fEmail">Email</label
+                  ><input
+                    id="fEmail"
+                    name="email"
+                    type="email"
+                    autocomplete="email"
+                  /><small class="err"></small>
+                </div>
+                <div class="col-md-6 field">
+                  <label for="fPhone">Phone <em>(optional)</em></label
+                  ><input
+                    id="fPhone"
+                    name="phone"
+                    type="tel"
+                    autocomplete="tel"
+                  /><small class="err"></small>
+                </div>
+                <div class="col-md-6 field">
+                  <label for="fInterest">I am interested in</label
+                  ><select id="fInterest" name="interest">
+                    <option value="">Choose…</option></select
+                  ><small class="err"></small>
+                </div>
+                <div class="col-12 field">
+                  <label for="fMessage"
+                    >Message
+                    <span class="count" id="msgCount">0 / 600</span></label
+                  ><textarea id="fMessage" name="message" rows="4"></textarea
+                  ><small class="err"></small>
+                </div>
+                <div class="col-12 field field-check">
+                  <label class="check"
+                    ><input type="checkbox" name="consent" /><span
+                      >I agree that Aqcha may reply to my message.</span
+                    ></label
+                  ><small class="err"></small>
+             <div class="form-actions">
+                <button class="btn btn-zaar" type="submit">
+                  Send message <span>↗</span>
+                </button>
+                <p class="form-note" id="formStatus" role="status"></p>
+              </div>
+            </form>
+
+            <div class="form-success" id="formSuccess" hidden>
+              <div class="tick">✓</div>
+              <h3>Message received</h3>
+              <p id="successText"></p>
+              <button type="button" class="hero-link" id="sendAnother">
+                Send another message <span>↗</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="wave-bottom wave-ink"></div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div
+        class="container d-flex justify-content-between align-items-center flex-wrap gap-3"
+      >
+        <a class="footer-logo" href="#home">Aqcha<span>.</span></a>
+        <p>Afghan heritage, woven into tomorrow.</p>
+        <span>© <span id="year"></span> Aqcha. All rights reserved.</span>
+      </div>
+    </footer>
+
+    <!-- DETAILS CARD (opens from the arrow on a collection piece) -->
+    <div
+      class="modal fade zaar-modal"
+      id="rugModal"
+      tabindex="-1"
+      aria-labelledby="rugModalTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <button
+            type="button"
+            class="modal-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          >
+            ×
+          </button>
+          <div class="row g-0">
+            <div class="col-md-5 modal-image-wrap">
+              <div class="slot" id="modalImage"></div>
+            </div>
+            <div class="col-md-7 modal-copy">
+              <p class="eyebrow" id="modalTag"></p>
+              <h2 id="rugModalTitle"></h2>
+              <p id="modalDescription"></p>
+              <div class="modal-details" id="modalDetails"></div>
+              <div class="modal-related">
+                <span>Also in the collection</span>
+                <div id="modalRelated"></div>
+              </div>
+              <a
+                class="text-link"
+                id="modalEnquire"
+                href="#contact"
+                data-bs-dismiss="modal"
+                >Enquire about this piece <span>↗</span></a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- END OF SECTION 5: THE CRAFT   |   Susan -->    </div>
+              </div>
+             
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
   </body>
 </html>
