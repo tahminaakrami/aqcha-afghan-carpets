@@ -1,22 +1,31 @@
-const IMAGE_FOLDER = "images/";
+"use strict";
 
+const IMAGE_FOLDER = "images/";
 
 const SHOW_PLACEHOLDERS = false;
 
 const IMAGES = {
-  hero: "hero.jpg",
-  story1: "story1.jpg",
-  story2: "story2.jpg",
-  rug1: "rug1.jpg",
-  rug2: "rug2.jpg",
-  rug3: "rug3.jpg",
-  col1: "col1.jpg",
-  col2: "col2.jpg",
-  col3: "col3.jpg",
-  craft: "craft.jpg",
-  bgQuote: "bg-quote.jpg",
+  hero: "hero.jpg", // big photo behind the title (wide)
+  story1: "story1.jpg", // large photo, "A heritage you can feel"
+  story2: "story2.jpg", // small photo next to it
+  rug1: "rug1.jpg", // unrolling rug, left   (tall photo is best)
+  rug2: "rug2.jpg", // unrolling rug, middle
+  rug3: "rug3.jpg", // unrolling rug, right
+  col1: "col1.jpg", // collection card 1 (Ruby Heritage)
+  col2: "col2.jpg", // collection card 2 (Old Soul)
+  col3: "col3.jpg", // collection card 3 (Golden Motif)
+  craft: "craft.jpg", // photo in "Slow hands. Endless stories."
+  bgQuote: "bg-quote.jpg", // faint fixed background behind the quote
 };
 
+/* =====================================================
+   PART 2 — CONTENT  (arrays of objects)
+   The code below reads these lists and builds the page from them.
+   NOTE: the piece details below are SAMPLE text.
+   Edit them so they match your real carpets.
+   ===================================================== */
+
+/* The three collection pieces */
 const PIECES = [
   {
     id: "ruby-heritage",
@@ -77,6 +86,7 @@ const PIECES = [
   },
 ];
 
+/* Crafts of Afghan women (chips in "Our story") */
 const CRAFTS = [
   {
     id: "carpet",
@@ -100,6 +110,7 @@ const CRAFTS = [
   },
 ];
 
+/* Steps of making a carpet (tabs in "The craft") */
 const PROCESS = [
   {
     title: "Wool",
@@ -119,15 +130,25 @@ const PROCESS = [
   },
 ];
 
+/* =====================================================
+   PART 3 — MAIN LOGIC
+   Sections: 1 helpers · 2 images · 3 building the page ·
+             4 scroll effects · 5 events · 6 form validation · 7 start
+   ===================================================== */
+
 /* ---------- 1. HELPERS (functions) ---------- */
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
+// While testing on your own computer, skip the browser cache so a
+// replaced photo shows up immediately.
 const IS_LOCAL = ["", "localhost", "127.0.0.1"].includes(location.hostname);
 const withBust = (url) =>
   IS_LOCAL && !/^https?:/i.test(url) ? `${url}?v=${Date.now()}` : url;
 
+/* ---------- 2. IMAGES ---------- */
+// Placeholder rug patterns: [background, medallion, accent]
 const PALETTES = [
   ["#8e2b2a", "#f1d9a0", "#1a2150"],
   ["#1a2150", "#e2b45e", "#8e2b2a"],
@@ -154,6 +175,7 @@ function imageCandidates(name) {
   return list.filter((url, i) => list.indexOf(url) === i).map(withBust);
 }
 
+// Try the files one after the other until one loads
 function tryLoad(urls, done) {
   if (urls.length === 0) return done(null);
   const img = new Image();
@@ -162,6 +184,7 @@ function tryLoad(urls, done) {
   img.src = urls[0];
 }
 
+// Put a picture into an element (the placeholder disappears when found)
 function setSlot(el, key, paletteIndex = 0) {
   const name = IMAGES[key];
   const token = (el._token = (el._token || 0) + 1); // ignore old, slower loads
@@ -178,7 +201,7 @@ function setSlot(el, key, paletteIndex = 0) {
       el.style.backgroundImage = `url("${url}")`;
       el.classList.remove("is-empty");
     } else {
-      el.classList.add("is-empty");
+      el.classList.add("is-empty"); // shows a small label with the file name we looked for
       console.info(`Aqcha: picture not found -> ${IMAGE_FOLDER}${name}`);
     }
   });
@@ -190,9 +213,11 @@ function loadAllImages() {
   );
 }
 
+/* ---------- 3. BUILDING THE PAGE (DOM + loops + array methods) ---------- */
 function renderCollection() {
   const grid = $("#collectionGrid");
 
+  // map() turns every object in PIECES into a card
   grid.innerHTML = PIECES.map(
     (piece, i) => `
     <article class="collection-card reveal" data-id="${piece.id}">
@@ -225,6 +250,7 @@ function renderInterestOptions() {
   options.forEach((o) => select.add(new Option(o.label, o.value)));
 }
 
+/* "Crafts of Afghan women" chips */
 function showCraft(craft) {
   const panel = $("#craftPanel");
   panel.classList.remove("show");
@@ -248,6 +274,7 @@ function renderCrafts() {
   });
 }
 
+/* "The craft" process tabs */
 function showStep(index) {
   const step = PROCESS[index];
   $$(".ptab").forEach((tab, i) => {
@@ -274,6 +301,7 @@ function renderProcess() {
     if (tab) showStep(Number(tab.dataset.step));
   });
 
+  // Keyboard: left / right arrows move between steps
   tabs.addEventListener("keydown", (e) => {
     const current = $$(".ptab").findIndex((t) =>
       t.classList.contains("active"),
@@ -306,6 +334,7 @@ function initScrollEffects() {
     if (y < innerHeight * 1.2)
       heroBg.style.transform = `translateY(${y * 0.25}px)`;
 
+    // Three rugs unroll one after the other while you scroll
     const box = unroll.getBoundingClientRect();
     const p = clamp(-box.top / (box.height - innerHeight), 0, 1);
     unroll.style.setProperty("--p", p);
@@ -340,6 +369,7 @@ function initReveal() {
   });
 }
 
+/* Soft gold ring that follows the mouse (desktop only) */
 function initCursor() {
   if (!matchMedia("(hover: hover) and (pointer: fine)").matches) return;
   const ring = document.createElement("div");
@@ -373,6 +403,7 @@ function initCursor() {
   })();
 }
 
+/* ---------- 5. EVENTS: collection cards and the details card ---------- */
 let rugModal = null;
 
 function fillModal(piece) {
@@ -451,6 +482,8 @@ function initMisc() {
   $("#year").textContent = new Date().getFullYear();
 }
 
+/* ---------- 6. FORM VALIDATION ---------- */
+// One function per field. Each returns an error text, or "" when the value is fine.
 const validators = {
   name(value) {
     const text = value.trim();
@@ -506,6 +539,7 @@ function initContactForm() {
   const message = $("#fMessage");
   const counter = $("#msgCount");
 
+  // Live feedback while typing / leaving a field
   Object.keys(validators).forEach((name) => {
     const field = form.elements[name];
     field.addEventListener("blur", () => checkField(field));
@@ -521,6 +555,7 @@ function initContactForm() {
   form.addEventListener("submit", (e) => {
     e.preventDefault(); // stay on the page
 
+    // Check every field with a loop and collect the broken ones
     const broken = [];
     for (const name of Object.keys(validators)) {
       const field = form.elements[name];
@@ -534,6 +569,7 @@ function initContactForm() {
       return;
     }
 
+    // Everything is valid: show a thank-you card
     status.textContent = "";
     const firstName = form.elements.name.value.trim().split(" ")[0];
     const chosen = form.elements.interest.selectedOptions[0].textContent;
@@ -555,7 +591,9 @@ function initContactForm() {
   });
 }
 
+/* ---------- 7. START ---------- */
 document.addEventListener("DOMContentLoaded", () => {
+  // Build content first, then pictures and effects
   renderCollection();
   renderInterestOptions();
   renderCrafts();
@@ -569,11 +607,13 @@ document.addEventListener("DOMContentLoaded", () => {
   initCursor();
   initMisc();
 
+  // The opening screen stays at least LOADER_MIN_MS (6.5 s counted from the moment the page
+  // started opening, so it is on screen for 6 s or more) and leaves only after the page has loaded.
   const LOADER_MIN_MS = 6500;
   const closeLoader = () => $(".page-loader")?.classList.add("is-hidden");
   const closeAfterMinimum = () =>
     setTimeout(closeLoader, Math.max(0, LOADER_MIN_MS - performance.now()));
   if (document.readyState === "complete") closeAfterMinimum();
   else window.addEventListener("load", closeAfterMinimum);
-  setTimeout(closeLoader, 12000);
+  setTimeout(closeLoader, 12000); // safety: never block the site if something loads very slowly
 });
