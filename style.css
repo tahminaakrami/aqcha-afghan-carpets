@@ -544,7 +544,6 @@ body:has(.page-loader:not(.is-hidden)) .hero-title .w i {
   color: var(--gold);
 }
 
-/* waves: each one carries the colour of the NEXT section and keeps moving */
 .wave-bottom {
   --w1: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 30C240 0 480 0 720 30S1200 60 1440 30V60H0Z'/%3E%3C/svg%3E");
   --w2: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' preserveAspectRatio='none'%3E%3Cpath d='M0 36C240 66 480 66 720 36S1200 6 1440 36V60H0Z'/%3E%3C/svg%3E");
@@ -1284,10 +1283,7 @@ blockquote em {
   }
 }
 
-/* =================================
-   FIXED BACKGROUNDS (stay still while content scrolls)
-   Each section clips its own fixed layer, so it works on phones too.
-================================= */
+
 .fx {
   clip-path: inset(0 0 -2px 0);
 }
@@ -1338,9 +1334,6 @@ blockquote em {
   background: var(--ivory);
 }
 
-/* =================================
-   ADDED: progress bar, cursor, hero medallion
-================================= */
 .scroll-progress {
   position: fixed;
   top: 0;

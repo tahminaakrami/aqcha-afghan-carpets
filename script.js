@@ -1,7 +1,6 @@
 const IMAGE_FOLDER = "images/";
 
-// false = a missing picture is a plain dark box with a small label (the file name it looks for).
-// true  = the box also shows a woven rug pattern.
+
 const SHOW_PLACEHOLDERS = false;
 
 const IMAGES = {
@@ -535,7 +534,6 @@ function initContactForm() {
       return;
     }
 
-    // Everything is valid: show a thank-you card
     status.textContent = "";
     const firstName = form.elements.name.value.trim().split(" ")[0];
     const chosen = form.elements.interest.selectedOptions[0].textContent;
