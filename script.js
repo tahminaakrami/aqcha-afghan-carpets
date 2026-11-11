@@ -5,25 +5,20 @@ const IMAGE_FOLDER = "images/";
 const SHOW_PLACEHOLDERS = false;
 
 const IMAGES = {
-  hero: "hero.jpg", // big photo behind the title (wide)
-  story1: "story1.jpg", // large photo, "A heritage you can feel"
-  story2: "story2.jpg", // small photo next to it
-  rug1: "rug1.jpg", // unrolling rug, left   (tall photo is best)
-  rug2: "rug2.jpg", // unrolling rug, middle
-  rug3: "rug3.jpg", // unrolling rug, right
-  col1: "col1.jpg", // collection card 1 (Ruby Heritage)
-  col2: "col2.jpg", // collection card 2 (Old Soul)
-  col3: "col3.jpg", // collection card 3 (Golden Motif)
-  craft: "craft.jpg", // photo in "Slow hands. Endless stories."
-  bgQuote: "bg-quote.jpg", // faint fixed background behind the quote
+  hero: "hero.jpg",
+  story1: "story1.jpg", 
+  story2: "story2.jpg", 
+  rug1: "rug1.jpg", 
+  rug2: "rug2.jpg", 
+  rug3: "rug3.jpg",
+  col1: "col1.jpg", 
+  col2: "col2.jpg", 
+  col3: "col3.jpg", 
+  craft: "craft.jpg", 
+  bgQuote: "bg-quote.jpg", 
 };
 
-/* =====================================================
-   PART 2 — CONTENT  (arrays of objects)
-   The code below reads these lists and builds the page from them.
-   NOTE: the piece details below are SAMPLE text.
-   Edit them so they match your real carpets.
-   ===================================================== */
+
 
 /* The three collection pieces */
 const PIECES = [
@@ -607,8 +602,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initCursor();
   initMisc();
 
-  // The opening screen stays at least LOADER_MIN_MS (6.5 s counted from the moment the page
-  // started opening, so it is on screen for 6 s or more) and leaves only after the page has loaded.
   const LOADER_MIN_MS = 6500;
   const closeLoader = () => $(".page-loader")?.classList.add("is-hidden");
   const closeAfterMinimum = () =>
