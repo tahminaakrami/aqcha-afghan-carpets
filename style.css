@@ -319,22 +319,52 @@ body:has(.page-loader:not(.is-hidden)) .hero-title .w i {
 }
 .navbar-toggler {
   border: 1px solid var(--gold);
+  border-radius: 10px;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 .navbar-toggler:focus {
   box-shadow: none;
 }
 .nav-toggle-lines,
-.nav-toggle-lines:before {
+.nav-toggle-lines:before,
+.nav-toggle-lines:after {
   display: block;
-  width: 23px;
-  height: 1px;
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
   background: var(--gold);
   position: relative;
+  transition:
+    transform 0.3s,
+    background 0.3s;
 }
-.nav-toggle-lines:before {
+.nav-toggle-lines:before,
+.nav-toggle-lines:after {
   content: "";
   position: absolute;
+  left: 0;
+}
+.nav-toggle-lines:before {
+  top: -7px;
+}
+.nav-toggle-lines:after {
   top: 7px;
+}
+/* menu open -> X */
+.navbar-toggler:not(.collapsed) .nav-toggle-lines {
+  background: transparent;
+}
+.navbar-toggler:not(.collapsed) .nav-toggle-lines:before {
+  transform: translateY(7px) rotate(45deg);
+}
+.navbar-toggler:not(.collapsed) .nav-toggle-lines:after {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* hero */
@@ -528,10 +558,17 @@ body:has(.page-loader:not(.is-hidden)) .hero-title .w i {
 
 /* titles */
 .section-title {
-  font-size: clamp(46px, 6vw, 78px);
-  line-height: 0.95;
-  letter-spacing: -1.5px;
+  font-size: clamp(56px, 7.4vw, 96px);
+  line-height: 1.02;
+  letter-spacing: 0.01em;
+  word-spacing: 0.08em;
+  font-kerning: normal;
+  text-rendering: optimizeLegibility;
   margin: 0;
+}
+.section-title em {
+  letter-spacing: 0.02em;
+  padding-right: 0.06em;
 }
 .section-title em {
   color: var(--madder);
@@ -1149,9 +1186,36 @@ blockquote em {
 /* tablet */
 @media (max-width: 991px) {
   .navbar-collapse {
-    background: #16111aee;
-    padding: 18px 22px;
-    margin-top: 12px;
+    background: #16111af2;
+    backdrop-filter: blur(14px);
+    padding: 12px 22px 22px;
+    margin-top: 14px;
+    border: 1px solid #e2b45e33;
+    border-radius: 14px;
+  }
+  .navbar-nav {
+    gap: 0;
+  }
+  .nav-link {
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    padding: 15px 4px !important;
+    border-bottom: 1px solid #ffffff14;
+    opacity: 1;
+  }
+  .nav-link:after {
+    display: none;
+  }
+  .nav-item:last-child .nav-link {
+    border-bottom: 0;
+  }
+  .nav-contact {
+    display: block;
+    text-align: center;
+    margin-top: 14px;
+    padding: 14px 17px !important;
+    border: 1px solid #e2b45eaa !important;
+    border-radius: 8px;
   }
   .collection-card {
     height: 390px;
@@ -1752,5 +1816,19 @@ blockquote em {
   }
   .process-panel {
     min-height: 190px;
+  }
+}
+
+@media (max-width: 575px) {
+  .zaar-nav {
+    padding: 14px 0;
+  }
+  .zaar-logo {
+    font-size: 28px;
+    letter-spacing: 3px;
+  }
+  .section-title {
+    font-size: clamp(54px, 15.5vw, 78px);
+    line-height: 1.04;
   }
 }

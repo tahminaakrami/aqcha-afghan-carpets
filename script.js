@@ -6,19 +6,17 @@ const SHOW_PLACEHOLDERS = false;
 
 const IMAGES = {
   hero: "hero.jpg",
-  story1: "story1.jpg", 
-  story2: "story2.jpg", 
-  rug1: "rug1.jpg", 
-  rug2: "rug2.jpg", 
+  story1: "story1.jpg",
+  story2: "story2.jpg",
+  rug1: "rug1.jpg",
+  rug2: "rug2.jpg",
   rug3: "rug3.jpg",
-  col1: "col1.jpg", 
-  col2: "col2.jpg", 
-  col3: "col3.jpg", 
-  craft: "craft.jpg", 
-  bgQuote: "bg-quote.jpg", 
+  col1: "col1.jpg",
+  col2: "col2.jpg",
+  col3: "col3.jpg",
+  craft: "craft.jpg",
+  bgQuote: "bg-quote.jpg",
 };
-
-
 
 /* The three collection pieces */
 const PIECES = [
